@@ -17,46 +17,41 @@ This project uses a custom Convolutional Neural Network (CNN) with six convoluti
 
 **CNN Architecture-**
 
-Conv2D(32 filters, 3x3 kernel, ReLU): Output shape →(32, 254, 254, 32)
+- **Convolutional Layers:** For feature extraction and classification.
+- **MaxPooling Layers:** For reducing spatial dimension of inputs.
+- **Flatten:** To transform the high-level 2D feature map into a one-dimensional vector.
+- **Dense:** Actual fully-connected neural network layer for classification. 
 
-MaxPooling2D (2x2 pool): Output shape →(32, 127, 127, 32)
+| Layer (Activation Function) | Output Shape   | Param #   |
+|:---------------:|:------------------:|:------:|
+| Conv2D (ReLU)   | (32, 254, 254, 32) | 896    |
+| MaxPooling2D    | (32, 127, 127, 32) | 0      | 
+| Conv2D (ReLU)   | (32, 125, 125, 64) | 18496  |
+| MaxPooling2D    | (32, 62, 62, 64)   | 0      |
+| Conv2D (ReLU)   | (32, 60, 60, 64)   | 36928  |
+| MaxPooling2D    | (32, 30, 30, 64)   | 0      |
+| Conv2D (ReLU)   | (32, 28, 28, 64)   | 36928  |
+| MaxPooling2D    | (32, 14, 14, 64)   | 0      |
+| Conv2D (ReLU)   | (32, 12, 12, 64)   | 36928  |
+| MaxPooling2D    | (32, 6, 6, 64)     | 0      |
+| Conv2D (ReLU)   | (32, 4, 4, 64)     | 36928  |
+| MaxPooling2D    | (32, 2, 2, 64)     | 0      |
+| Flatten         | (256)              | 0      |
+| Dense (Softmax) | (64)               | 16448  |
 
-Conv2D(64 filters, 3x3 kernel, ReLU): Output shape →(32, 125, 125, 64)
+**Total Trainable Parameters-** 183552 
 
-MaxPooling2D (2x2 pool): Output shape →(32, 62, 62, 64)
+**Optimizer-** 'adam'
 
-Conv2D (64 filters, 3x3 kernel, ReLU): Output shape →(32, 60, 60, 64)
+## Results
 
-MaxPooling2D (2x2 pool): Output shape →(32, 30, 30, 64)
+**Training accurary -** 0.9832 ;  **Training loss -** 0.0428
 
-Conv2D (64 filters, 3x3 kernel, ReLU): Output shape →(32, 28, 28, 64)
+**Validation accuracy -** 0.9762 ;  **Validation loss -** 0.0705
 
-MaxPooling2D (2x2 pool): Output shape →(32, 14, 14, 64)
+**Testing accuracy -** 1.0 ;  **Testing loss -** 0.0178
 
-Conv2D (64 filters, 3x3 kernel, ReLU): Output shape →(32, 12, 12, 64)
-
-MaxPooling2D (2x2 pool): Output shape →(32, 6, 6, 64)
-
-Conv2D (64 filters, 3x3 kernel, ReLU): Output shape →(32, 4, 4, 64)
-
-MaxPooling2D (2x2 pool): Output shape →(32, 2, 2, 64)
-
-Flatten: Output shape → 256 (Flattened vector size)
-
-Dense (64 units, ReLU): Output shape → 64
-
-Dense (3 units, Softmax): Output shape → 3 
-[Healthy, Early Blight, Late Blight]
-
-[Trainable parameters = 183552, Optimizer = 'adam']
-
-**Results-**
-
-Training accurary - 0.9832 ; Training loss - 0.0428
-
-Validation accuracy - 0.9762 ; Validation loss - 0.0705
-
-Testing accuracy - 1.0 ; Testing loss - 0.0178
+From the above values, we can observe that even though there is a drop in values of validation accuracy and raise in validation loss with respect to training accuracy and training loss respectively(which may be arrived due to sparse overfitting occured in the initial training phase), we can visualise that the increase in testing accuracy and significant reduce in testing loss, which depicts the effectiveness of techniques used during the data preprocessing.
 
 
 
